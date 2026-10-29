@@ -2,91 +2,193 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ki Gás e Água</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f0f7ff;
-      color: #17324d;
-      text-align: center;
-    }
-    header {
-      background: #0877d1;
-      color: white;
-      padding: 28px 15px;
-    }
-    header h1 { margin: 0 0 8px; }
-    main {
-      max-width: 480px;
-      margin: 25px auto;
-      padding: 15px;
-    }
-    .produto {
-      background: white;
-      border-radius: 16px;
-      padding: 22px;
-      margin: 16px 0;
-      box-shadow: 0 3px 12px #00000012;
-    }
-    .preco {
-      font-size: 28px;
-      font-weight: bold;
-      color: #0877d1;
-      margin: 12px;
-    }
-    .botao {
-      display: block;
-      background: #16a34a;
-      color: white;
-      text-decoration: none;
-      padding: 14px;
-      border-radius: 10px;
-      font-weight: bold;
-      margin-top: 12px;
-    }
-    .pix {
-      background: white;
-      border-radius: 16px;
-      padding: 20px;
-      overflow-wrap: anywhere;
-    }
-    footer { padding: 20px; color: #526477; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ki Gás e Água</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172554}
+header{background:#075985;color:white;text-align:center;padding:25px 15px}
+header h1{margin:0;font-size:30px}
+header p{margin:8px 0 0}
+main{max-width:650px;margin:20px auto;padding:12px}
+.card{background:white;padding:18px;margin-bottom:15px;border-radius:14px;box-shadow:0 3px 12px #00000010}
+h2{font-size:20px;margin-top:0;color:#075985}
+.product{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd;padding:14px 0;gap:10px}
+.product:last-child{border:0}
+.price{font-weight:bold;color:#087443}
+button{background:#0284c7;color:white;border:0;border-radius:9px;padding:12px 16px;font-weight:bold;cursor:pointer}
+button:disabled{background:#94a3b8}
+input,select,textarea{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;margin:6px 0 13px;font-size:16px}
+label{font-weight:bold;font-size:14px}
+.total{font-size:24px;font-weight:bold;color:#087443}
+.remove{background:#dc2626;padding:7px 10px}
+.full{width:100%;margin-top:10px}
+.notice{background:#e0f2fe;padding:12px;border-radius:9px;font-size:14px}
+.closed{background:#fee2e2;color:#991b1b;padding:12px;border-radius:9px}
+#receipt{display:none}
+footer{text-align:center;padding:20px;color:#64748b;font-size:13px}
+@media print{
+ body{background:white}
+ body *{visibility:hidden}
+ #receipt,#receipt *{visibility:visible}
+ #receipt{display:block;position:absolute;left:0;top:0;width:100%;padding:15px;color:black}
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Ki Gás e Água</h1>
-    <p>Seu gás e sua água com praticidade!</p>
-  </header>
+<header>
+<h1>🔵 Ki Gás e Água</h1>
+<p>Seu pedido com praticidade e rapidez!</p>
+</header>
 
-  <main>
-    <div class="produto">
-      <h2>🔥 Botijão de gás</h2>
-      <p>Peça seu gás!</p>
-      <div class="preco">R$ 120,00</div>
-      <a class="botao" href="https://wa.me/?text=Olá!%20Quero%20pedir%20um%20botijão%20de%20gás." target="_blank">Pedir gás pelo WhatsApp</a>
-    </div>
+<main>
+<div class="card">
+<h2>🛒 Nossos produtos</h2>
+<div class="product">
+<div><strong>Botijão de gás</strong><br><span class="price">R$ 120,00</span></div>
+<button onclick="add('Gás',120)">Adicionar</button>
+</div>
+<div class="product">
+<div><strong>Água</strong><br><span class="price">R$ 15,00</span></div>
+<button onclick="add('Água',15)">Adicionar</button>
+</div>
+</div>
 
-    <div class="produto">
-      <h2>💧 Água mineral</h2>
-      <p>Peça sua água!</p>
-      <div class="preco">R$ 15,00</div>
-      <a class="botao" href="https://wa.me/?text=Olá!%20Quero%20pedir%20água%20mineral." target="_blank">Pedir água pelo WhatsApp</a>
-    </div>
+<div class="card">
+<h2>Seu carrinho</h2>
+<div id="cart">Seu carrinho está vazio.</div>
+<p>Total: <span class="total" id="total">R$ 0,00</span></p>
+</div>
 
-    <div class="pix">
-      <h2>💳 Pagamento via Pix</h2>
-      <p><strong>Chave Pix:</strong></p>
-      <p>35998051386</p>
-      <p><strong>Titular:</strong><br>Reinaldo Bernardo de Souza</p>
-    </div>
-  </main>
+<div class="card">
+<h2>📍 Dados para entrega</h2>
+<form name="pedido" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="orderForm">
+<input type="hidden" name="form-name" value="pedido">
+<p hidden><label>Não preencher: <input name="bot-field"></label></p>
+<input type="hidden" name="itens" id="itensField">
+<input type="hidden" name="total" id="totalField">
 
-  <footer>Ki Gás e Água — Atendimento com carinho!</footer>
+<label>Nome completo</label>
+<input name="nome" required placeholder="Nome do cliente">
+
+<label>Telefone</label>
+<input name="telefone" required type="tel" placeholder="(00) 00000-0000">
+
+<label>Endereço completo</label>
+<textarea name="endereco" required placeholder="Rua, número, bairro e referência"></textarea>
+
+<label>Forma de pagamento</label>
+<select name="pagamento" required>
+<option value="">Selecione</option>
+<option>Pix</option>
+<option>Dinheiro</option>
+<option>Cartão</option>
+</select>
+
+<label>Observações</label>
+<textarea name="observacoes" placeholder="Informações adicionais (opcional)"></textarea>
+
+<div id="hours" class="notice"></div>
+<button class="full" type="submit" id="submitBtn">Finalizar pedido</button>
+</form>
+</div>
+
+<div class="card notice">
+<strong>Horário de atendimento</strong><br>
+Segunda a sábado: 08h às 18h<br>
+Domingo: 08h às 12h
+</div>
+
+<div class="card">
+<h2>Pagamento via Pix</h2>
+<p>Chave Pix: <strong>35998051386</strong></p>
+<p>Titular: Reinaldo Bernardo de Souza</p>
+<button onclick="copyPix()">Copiar chave Pix</button>
+</div>
+
+<div id="receipt"></div>
+</main>
+<footer>Ki Gás e Água • Obrigado pela preferência!</footer>
+
+<script>
+const cart={};
+const money=v=>v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+
+function add(name,price){
+ cart[name]=(cart[name]||0)+1;
+ render();
+}
+function change(name,delta){
+ cart[name]+=delta;
+ if(cart[name]<=0) delete cart[name];
+ render();
+}
+function render(){
+ let html='',total=0,items=[];
+ for(const name in cart){
+  const price=name==='Gás'?120:15;
+  const subtotal=price*cart[name];
+  total+=subtotal;
+  items.push(`${cart[name]} x ${name}`);
+  html+=`<div class="product"><span>${name} — ${cart[name]} unidade(s)<br>${money(subtotal)}</span><span><button onclick="change('${name}',-1)">−</button> <button onclick="change('${name}',1)">+</button></span></div>`;
+ }
+ document.getElementById('cart').innerHTML=html||'Seu carrinho está vazio.';
+ document.getElementById('total').textContent=money(total);
+ document.getElementById('itensField').value=items.join(', ');
+ document.getElementById('totalField').value=money(total);
+ return {total,items};
+}
+function isOpen(){
+ const now=new Date();
+ const day=now.getDay(), minutes=now.getHours()*60+now.getMinutes();
+ if(day===0) return minutes>=480&&minutes<720;
+ return day>=1&&day<=6&&minutes>=480&&minutes<1080;
+}
+function updateHours(){
+ const open=isOpen();
+ document.getElementById('hours').textContent=open?'Estamos recebendo pedidos agora!':'Estamos fechados no momento. Nosso horário é de segunda a sábado, das 08h às 18h, e domingo, das 08h às 12h.';
+ document.getElementById('hours').className=open?'notice':'closed';
+ document.getElementById('submitBtn').disabled=!open;
+}
+updateHours();
+setInterval(updateHours,30000);
+
+document.getElementById('orderForm').addEventListener('submit',function(e){
+ const {total,items}=render();
+ if(!items.length||total<=0){
+  e.preventDefault();
+  alert('Adicione pelo menos um produto ao carrinho.');
+  return;
+ }
+ if(!isOpen()){
+  e.preventDefault();
+  alert('Estamos fora do horário de atendimento.');
+  return;
+ }
+ const data=new FormData(this);
+ const receipt=document.getElementById('receipt');
+ receipt.innerHTML=`
+ <h2>KI GÁS E ÁGUA — PEDIDO</h2>
+ <p><strong>Cliente:</strong> ${safe(data.get('nome'))}</p>
+ <p><strong>Telefone:</strong> ${safe(data.get('telefone'))}</p>
+ <p><strong>Endereço:</strong> ${safe(data.get('endereco'))}</p>
+ <p><strong>Itens:</strong> ${safe(items.join(', '))}</p>
+ <p><strong>Total:</strong> ${money(total)}</p>
+ <p><strong>Pagamento:</strong> ${safe(data.get('pagamento'))}</p>
+ <p><strong>Observações:</strong> ${safe(data.get('observacoes'))}</p>
+ <p>Obrigado pela preferência!</p>`;
+});
+function safe(v){
+ return String(v||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function copyPix(){
+ navigator.clipboard.writeText('35998051386')
+ .then(()=>alert('Chave Pix copiada!'))
+ .catch(()=>alert('Chave Pix: 35998051386'));
+}
+</script>
 </body>
 </html>
+
 
