@@ -3,80 +3,139 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ki Gás e Água</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172554}
-header{background:#075985;color:white;text-align:center;padding:25px 15px}
-header h1{margin:0;font-size:30px}
+body{margin:0;background:#f1f6fb;color:#17324d;font-family:Arial,sans-serif}
+header{background:linear-gradient(135deg,#075985,#0284c7);color:white;text-align:center;padding:30px 15px 35px;border-radius:0 0 25px 25px}
+header h1{font-size:30px;margin:0}
 header p{margin:8px 0 0}
-main{max-width:650px;margin:20px auto;padding:12px}
-.card{background:white;padding:18px;margin-bottom:15px;border-radius:14px;box-shadow:0 3px 12px #00000010}
-h2{font-size:20px;margin-top:0;color:#075985}
-.product{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd;padding:14px 0;gap:10px}
-.product:last-child{border:0}
-.price{font-weight:bold;color:#087443}
-button{background:#0284c7;color:white;border:0;border-radius:9px;padding:12px 16px;font-weight:bold;cursor:pointer}
-button:disabled{background:#94a3b8}
-input,select,textarea{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;margin:6px 0 13px;font-size:16px}
-label{font-weight:bold;font-size:14px}
-.total{font-size:24px;font-weight:bold;color:#087443}
-.remove{background:#dc2626;padding:7px 10px}
-.full{width:100%;margin-top:10px}
-.notice{background:#e0f2fe;padding:12px;border-radius:9px;font-size:14px}
-.closed{background:#fee2e2;color:#991b1b;padding:12px;border-radius:9px}
-#receipt{display:none}
-footer{text-align:center;padding:20px;color:#64748b;font-size:13px}
+main{max-width:680px;margin:20px auto;padding:0 13px}
+.card{background:white;border-radius:18px;padding:18px;margin-bottom:16px;box-shadow:0 4px 16px #12334412}
+h2{font-size:20px;color:#075985;margin:0 0 15px}
+.products{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.product{border:1px solid #e0eaf2;border-radius:15px;padding:12px;text-align:center}
+.product svg{width:100%;height:125px}
+.product h3{font-size:16px;margin:8px 0}
+.price{font-size:21px;color:#087443;font-weight:bold;margin:7px}
+.product button,.mainbtn{background:#0284c7;color:white;border:0;border-radius:10px;padding:12px;font-weight:bold;width:100%;cursor:pointer}
+.product button{margin-top:8px}
+input,select,textarea{width:100%;padding:13px;border:1px solid #cbd5e1;border-radius:10px;font-size:16px;margin:6px 0 14px;background:white}
+label{font-size:14px;font-weight:bold}
+.cartline{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid #e5e7eb;padding:12px 0}
+.cartline button{border:0;border-radius:7px;padding:7px 11px;background:#e0f2fe;color:#075985;font-weight:bold}
+.totalrow{display:flex;justify-content:space-between;padding:7px 0}
+.grand{font-size:23px;font-weight:bold;color:#087443}
+.notice{background:#e0f2fe;padding:13px;border-radius:10px;font-size:14px}
+.closed{background:#fee2e2;color:#991b1b;padding:13px;border-radius:10px}
+.small{font-size:13px;color:#64748b}
+#result{display:none}
+footer{text-align:center;padding:22px;color:#64748b;font-size:13px}
+@media(max-width:380px){.products{grid-template-columns:1fr}}
 @media print{
- body{background:white}
  body *{visibility:hidden}
  #receipt,#receipt *{visibility:visible}
- #receipt{display:block;position:absolute;left:0;top:0;width:100%;padding:15px;color:black}
+ #receipt{display:block!important;position:absolute;left:0;top:0;width:100%;padding:15px;color:#000}
 }
 </style>
 </head>
 <body>
 <header>
 <h1>🔵 Ki Gás e Água</h1>
-<p>Seu pedido com praticidade e rapidez!</p>
+<p>Qualidade e praticidade na sua entrega!</p>
 </header>
 
 <main>
-<div class="card">
-<h2>🛒 Nossos produtos</h2>
+<section class="card">
+<h2>🛍️ Nossos produtos</h2>
+<div class="products">
+
 <div class="product">
-<div><strong>Botijão de gás</strong><br><span class="price">R$ 120,00</span></div>
-<button onclick="add('Gás',120)">Adicionar</button>
-</div>
-<div class="product">
-<div><strong>Água</strong><br><span class="price">R$ 15,00</span></div>
-<button onclick="add('Água',15)">Adicionar</button>
-</div>
+<svg viewBox="0 0 150 140" role="img" aria-label="Ilustração de botijão de gás">
+<ellipse cx="75" cy="126" rx="42" ry="7" fill="#dbeafe"/>
+<rect x="57" y="14" width="36" height="12" rx="4" fill="#64748b"/>
+<rect x="48" y="25" width="54" height="94" rx="17" fill="#0e9bd7" stroke="#0875a9" stroke-width="3"/>
+<path d="M59 31 Q45 65 59 111" fill="none" stroke="#7dd3fc" stroke-width="5" opacity=".7"/>
+<rect x="66" y="10" width="18" height="7" rx="2" fill="#64748b"/>
+<text x="75" y="75" text-anchor="middle" font-size="12" font-weight="bold" fill="white">GÁS</text>
+<text x="75" y="90" text-anchor="middle" font-size="8" fill="white">13 kg</text>
+</svg>
+<h3>Botijão de gás</h3>
+<div class="price">R$ 125,00</div>
+<button onclick="add('Botijão de gás',125)">Adicionar</button>
 </div>
 
-<div class="card">
-<h2>Seu carrinho</h2>
+<div class="product">
+<svg viewBox="0 0 150 140" role="img" aria-label="Ilustração de galão de água">
+<ellipse cx="75" cy="126" rx="42" ry="7" fill="#dbeafe"/>
+<path d="M60 20 L90 20 L94 38 Q108 45 108 60 L108 111 Q108 120 98 120 L52 120 Q42 120 42 111 L42 60 Q42 45 56 38 Z" fill="#38bdf8" stroke="#0284c7" stroke-width="3"/>
+<rect x="62" y="12" width="26" height="12" rx="3" fill="#075985"/>
+<path d="M54 48 Q46 82 55 108" fill="none" stroke="#e0f2fe" stroke-width="6" opacity=".8"/>
+<path d="M45 80 Q75 72 105 80 L105 110 Q105 117 96 117 L54 117 Q45 117 45 110 Z" fill="#bae6fd" opacity=".6"/>
+<text x="75" y="95" text-anchor="middle" font-size="11" font-weight="bold" fill="#075985">ÁGUA</text>
+</svg>
+<h3>Troca de galão</h3>
+<div class="price">R$ 15,00</div>
+<button onclick="add('Troca de galão de água',15)">Adicionar</button>
+</div>
+
+<div class="product">
+<svg viewBox="0 0 150 140" role="img" aria-label="Ilustração de galão completo">
+<ellipse cx="75" cy="126" rx="42" ry="7" fill="#dbeafe"/>
+<path d="M60 20 L90 20 L94 38 Q108 45 108 60 L108 111 Q108 120 98 120 L52 120 Q42 120 42 111 L42 60 Q42 45 56 38 Z" fill="#0284c7" stroke="#075985" stroke-width="3"/>
+<rect x="62" y="12" width="26" height="12" rx="3" fill="#075985"/>
+<path d="M54 48 Q46 82 55 108" fill="none" stroke="#bae6fd" stroke-width="6"/>
+<text x="75" y="88" text-anchor="middle" font-size="10" font-weight="bold" fill="white">COMPLETO</text>
+</svg>
+<h3>Galão completo</h3>
+<div class="price">R$ 40,00</div>
+<button onclick="add('Galão completo com vasilhame',40)">Adicionar</button>
+</div>
+
+</div>
+</section>
+
+<section class="card">
+<h2>🛒 Meu carrinho</h2>
 <div id="cart">Seu carrinho está vazio.</div>
-<p>Total: <span class="total" id="total">R$ 0,00</span></p>
-</div>
+<hr style="border:0;border-top:1px solid #e5e7eb">
+<div class="totalrow"><span>Produtos</span><strong id="subtotal">R$ 0,00</strong></div>
+<div class="totalrow"><span>Frete</span><strong id="frete">R$ 0,00</strong></div>
+<div class="totalrow grand"><span>Total</span><span id="total">R$ 0,00</span></div>
+</section>
 
-<div class="card">
+<section class="card">
 <h2>📍 Dados para entrega</h2>
 <form name="pedido" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="orderForm">
 <input type="hidden" name="form-name" value="pedido">
-<p hidden><label>Não preencher: <input name="bot-field"></label></p>
+<p hidden><label>Não preencher <input name="bot-field"></label></p>
 <input type="hidden" name="itens" id="itensField">
+<input type="hidden" name="subtotal" id="subtotalField">
+<input type="hidden" name="frete" id="freteField">
 <input type="hidden" name="total" id="totalField">
 
 <label>Nome completo</label>
 <input name="nome" required placeholder="Nome do cliente">
 
 <label>Telefone</label>
-<input name="telefone" required type="tel" placeholder="(00) 00000-0000">
+<input name="telefone" type="tel" required placeholder="Seu telefone">
 
-<label>Endereço completo</label>
-<textarea name="endereco" required placeholder="Rua, número, bairro e referência"></textarea>
+<label>Onde será a entrega?</label>
+<select name="localidade" id="localidade" required onchange="render()">
+<option value="">Escolha sua localidade</option>
+<option value="Campestre">Campestre — Frete grátis</option>
+<option value="Moinho antes da ponte">Moinho antes da ponte — Frete grátis</option>
+<option value="Moinho depois da ponte">Moinho depois da ponte — R$ 5,00</option>
+<option value="Rosário">Rosário — R$ 5,00</option>
+<option value="Fazenda">Fazenda — R$ 5,00</option>
+<option value="Choroso">Choroso — R$ 5,00</option>
+<option value="Formigas">Formigas — R$ 5,00</option>
+<option value="Pereiras">Pereiras — R$ 5,00</option>
+</select>
+
+<label>Endereço, número e referência</label>
+<textarea name="endereco" required placeholder="Informe o endereço completo"></textarea>
 
 <label>Forma de pagamento</label>
 <select name="pagamento" required>
@@ -87,108 +146,134 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:13px}
 </select>
 
 <label>Observações</label>
-<textarea name="observacoes" placeholder="Informações adicionais (opcional)"></textarea>
+<textarea name="observacoes" placeholder="Troco para quanto? Alguma informação?"></textarea>
 
-<div id="hours" class="notice"></div>
-<button class="full" type="submit" id="submitBtn">Finalizar pedido</button>
+<div id="hours" class="notice" style="margin-bottom:12px"></div>
+<button class="mainbtn" type="submit" id="submitBtn">Finalizar pedido</button>
 </form>
+<div id="result" class="notice" style="margin-top:15px">
+<strong>Pedido enviado!</strong>
+<p>Seu pedido foi registrado. Obrigado pela preferência!</p>
+<button class="mainbtn" onclick="window.print()">Imprimir pedido</button>
 </div>
+<div id="receipt"></div>
+</section>
 
-<div class="card notice">
+<section class="card">
+<h2>💙 Pagamento via Pix</h2>
+<p>Chave Pix: <strong>35998051386</strong></p>
+<p>Titular: Reinaldo Bernardo de Souza</p>
+<button class="mainbtn" onclick="copyPix()">Copiar chave Pix</button>
+</section>
+
+<section class="card notice">
 <strong>Horário de atendimento</strong><br>
 Segunda a sábado: 08h às 18h<br>
 Domingo: 08h às 12h
-</div>
-
-<div class="card">
-<h2>Pagamento via Pix</h2>
-<p>Chave Pix: <strong>35998051386</strong></p>
-<p>Titular: Reinaldo Bernardo de Souza</p>
-<button onclick="copyPix()">Copiar chave Pix</button>
-</div>
-
-<div id="receipt"></div>
+</section>
 </main>
+
 <footer>Ki Gás e Água • Obrigado pela preferência!</footer>
 
 <script>
 const cart={};
-const money=v=>v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-
-function add(name,price){
- cart[name]=(cart[name]||0)+1;
- render();
-}
-function change(name,delta){
- cart[name]+=delta;
- if(cart[name]<=0) delete cart[name];
- render();
+const prices={
+'Botijão de gás':125,
+'Troca de galão de água':15,
+'Galão completo com vasilhame':40
+};
+const freePlaces=['Campestre','Moinho antes da ponte'];
+function money(n){return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});}
+function add(name,price){cart[name]=(cart[name]||0)+1;render();}
+function change(name,n){cart[name]=(cart[name]||0)+n;if(cart[name]<=0)delete cart[name];render();}
+function getShipping(){
+ const place=document.getElementById('localidade').value;
+ if(!place)return 0;
+ return freePlaces.includes(place)?0:5;
 }
 function render(){
- let html='',total=0,items=[];
+ let html='',subtotal=0,items=[];
  for(const name in cart){
-  const price=name==='Gás'?120:15;
-  const subtotal=price*cart[name];
-  total+=subtotal;
-  items.push(`${cart[name]} x ${name}`);
-  html+=`<div class="product"><span>${name} — ${cart[name]} unidade(s)<br>${money(subtotal)}</span><span><button onclick="change('${name}',-1)">−</button> <button onclick="change('${name}',1)">+</button></span></div>`;
+  const qty=cart[name],price=prices[name],sum=qty*price;
+  subtotal+=sum;
+  items.push(qty+' x '+name+' ('+money(sum)+')');
+  html+=`<div class="cartline"><span><strong>${name}</strong><br>${qty} unidade(s) — ${money(sum)}</span><span><button type="button" onclick="change('${name}',-1)">−</button> <button type="button" onclick="change('${name}',1)">+</button></span></div>`;
  }
  document.getElementById('cart').innerHTML=html||'Seu carrinho está vazio.';
+ const shipping=getShipping(),total=subtotal+shipping;
+ document.getElementById('subtotal').textContent=money(subtotal);
+ document.getElementById('frete').textContent=money(shipping);
  document.getElementById('total').textContent=money(total);
- document.getElementById('itensField').value=items.join(', ');
+ document.getElementById('itensField').value=items.join('; ');
+ document.getElementById('subtotalField').value=money(subtotal);
+ document.getElementById('freteField').value=money(shipping);
  document.getElementById('totalField').value=money(total);
- return {total,items};
+ return {subtotal,shipping,total,items};
 }
 function isOpen(){
- const now=new Date();
- const day=now.getDay(), minutes=now.getHours()*60+now.getMinutes();
- if(day===0) return minutes>=480&&minutes<720;
- return day>=1&&day<=6&&minutes>=480&&minutes<1080;
+ const d=new Date(),day=d.getDay(),m=d.getHours()*60+d.getMinutes();
+ return day===0?(m>=480&&m<720):(day>=1&&day<=6&&m>=480&&m<1080);
 }
 function updateHours(){
  const open=isOpen();
- document.getElementById('hours').textContent=open?'Estamos recebendo pedidos agora!':'Estamos fechados no momento. Nosso horário é de segunda a sábado, das 08h às 18h, e domingo, das 08h às 12h.';
- document.getElementById('hours').className=open?'notice':'closed';
+ const box=document.getElementById('hours');
+ box.textContent=open?'Estamos recebendo pedidos agora!':'Estamos fechados. Atendimento: segunda a sábado, 08h às 18h; domingo, 08h às 12h.';
+ box.className=open?'notice':'closed';
  document.getElementById('submitBtn').disabled=!open;
 }
 updateHours();
 setInterval(updateHours,30000);
 
-document.getElementById('orderForm').addEventListener('submit',function(e){
- const {total,items}=render();
- if(!items.length||total<=0){
-  e.preventDefault();
-  alert('Adicione pelo menos um produto ao carrinho.');
-  return;
- }
- if(!isOpen()){
-  e.preventDefault();
-  alert('Estamos fora do horário de atendimento.');
-  return;
- }
- const data=new FormData(this);
+document.getElementById('orderForm').addEventListener('submit',async function(e){
+ e.preventDefault();
+ const {subtotal,shipping,total,items}=render();
+ if(!items.length){alert('Adicione produtos ao carrinho.');return;}
+ if(!document.getElementById('localidade').value){alert('Escolha sua localidade.');return;}
+ if(!isOpen()){alert('Estamos fora do horário de atendimento.');return;}
+
+ const form=this;
+ const data=new FormData(form);
  const receipt=document.getElementById('receipt');
+ const safe=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  receipt.innerHTML=`
  <h2>KI GÁS E ÁGUA — PEDIDO</h2>
  <p><strong>Cliente:</strong> ${safe(data.get('nome'))}</p>
  <p><strong>Telefone:</strong> ${safe(data.get('telefone'))}</p>
+ <p><strong>Localidade:</strong> ${safe(data.get('localidade'))}</p>
  <p><strong>Endereço:</strong> ${safe(data.get('endereco'))}</p>
- <p><strong>Itens:</strong> ${safe(items.join(', '))}</p>
+ <p><strong>Produtos:</strong> ${safe(items.join(', '))}</p>
+ <p><strong>Subtotal:</strong> ${money(subtotal)}</p>
+ <p><strong>Frete:</strong> ${money(shipping)}</p>
  <p><strong>Total:</strong> ${money(total)}</p>
  <p><strong>Pagamento:</strong> ${safe(data.get('pagamento'))}</p>
  <p><strong>Observações:</strong> ${safe(data.get('observacoes'))}</p>
  <p>Obrigado pela preferência!</p>`;
+ const btn=document.getElementById('submitBtn');
+ btn.disabled=true;
+ btn.textContent='Enviando pedido...';
+ try{
+  const body=new URLSearchParams();
+  for(const [key,value] of data.entries())body.append(key,value);
+  const response=await fetch('/',{
+   method:'POST',
+   headers:{'Content-Type':'application/x-www-form-urlencoded'},
+   body:body.toString()
+  });
+  if(!response.ok)throw new Error('Falha no envio');
+  form.style.display='none';
+  document.getElementById('result').style.display='block';
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+ }catch(err){
+  alert('Não foi possível enviar o pedido. Tente novamente.');
+  btn.disabled=false;
+  btn.textContent='Finalizar pedido';
+ }
 });
-function safe(v){
- return String(v||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
 function copyPix(){
- navigator.clipboard.writeText('35998051386')
- .then(()=>alert('Chave Pix copiada!'))
- .catch(()=>alert('Chave Pix: 35998051386'));
+ if(navigator.clipboard&&navigator.clipboard.writeText){
+  navigator.clipboard.writeText('35998051386').then(()=>alert('Chave Pix copiada!')).catch(()=>alert('Chave Pix: 35998051386'));
+ }else alert('Chave Pix: 35998051386');
 }
 </script>
 </body>
 </html>
-
-
